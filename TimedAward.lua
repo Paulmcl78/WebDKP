@@ -129,12 +129,16 @@ ZoneName = GetRealZoneText();
 	arg7 == "Yor'sahj the Unsleeping" or
 	arg7 == "Hagara the Stormbinder" or
 	arg7 == "Ultraxion" or
+	arg7 == "Deathwing" or
 	arg7 == "Warmaster Blackhorn" then
 		if arg7 == nil then
 			arg7 = arg2;
 		end
 		if ZoneName == "Blackwing Descent" and arg7 == "Onyxia" then
 			return;
+		end
+		if arg7 == "Deathwing" then
+			arg7 = "Spine of Deathwing";
 		end
 
 		if RaidTotal > 15 and WebDKP_Options["AwardBossDKP25"] == 1 then GoFlag = 1 end 			-- Is the group 25 and is 25 enabled
@@ -185,7 +189,10 @@ ZoneName = GetRealZoneText();
 	(arg2 == "Baleroc" and (string.find(arg1, "Mortal filth... the master's keep is forbidden....")== 1)) or
 	(arg2 == "Alysrazor" and (string.find(arg1, "The light...")== 1)) or
 	(arg2 == "Ragnaros" and (string.find(arg1, "Too soon!")== 1)) or
-	(arg2 == "Kalecgos" and (string.find(arg1, "Well done! I will realign the flow of mana and fill the Dragon Soul with all my arcane might.")== 1)) or
+	(arg2 == "Kalecgos" and (string.find(arg1, "I will realign the flow of mana and fill the Dragon Soul with all my arcane might")~=nil)) or
+	(arg2 == "Alexstrasza" and (string.find(arg1, "Excellent work. The fire of my heart glows with a brilliant purity unmatched. Every spark of it I will channel into the Dragon Soul")~=nil)) or
+	(arg2 == "Nozdormu" and (string.find(arg1, "I will expend EVERYTHING to bind every thread here, now, around the Dragon Soul. What comes to pass will never be undone")~=nil)) or
+	(arg2 == "Ysera" and (string.find(arg1, "We are one step closer. The unknowable, transcendent power of the Emerald Dream, I now give unto the Dragon Soul")~=nil)) or
 	(arg2 == "Garrosh Hellscream" and (string.find(arg1, "FOR THE HORDE!")== 1)) then
 		if arg2 == "Brann Bronzebeard" and (string.find(arg1, "You've defeated the Iron Council")==1) then
 			arg2 = "Iron Council";
@@ -197,7 +204,10 @@ ZoneName = GetRealZoneText();
 		elseif arg2 == "Muradin Bronzebeard" and (string.find(arg1, "Don't say I didn't warn ya, scoundrels! Onward, brothers and sisters!")==1) or 
 				arg2 == "High Overlord Saurfang" and (string.find(arg1, "The Alliance falter. Onward to the Lich King!")==1) then
 			arg2 = "Gunship Battle - ICC";
-		elseif arg2 == "Kalecgos" and (string.find(arg1, "Well done! I will realign the flow of mana and fill the Dragon Soul with all my arcane might.")== 1) then
+		elseif arg2 == "Kalecgos" and (string.find(arg1, "I will realign the flow of mana and fill the Dragon Soul with all my arcane might")~=nil) or
+				arg2 == "Alexstrasza" and (string.find(arg1, "Excellent work. The fire of my heart glows with a brilliant purity unmatched. Every spark of it I will channel into the Dragon Soul")~=nil) or
+				arg2 == "Nozdormu" and (string.find(arg1, "I will expend EVERYTHING to bind every thread here, now, around the Dragon Soul. What comes to pass will never be undone")~=nil) or
+				arg2 == "Ysera" and (string.find(arg1, "We are one step closer. The unknowable, transcendent power of the Emerald Dream, I now give unto the Dragon Soul")~=nil) then
 			arg2 = "Madness of Deathwing";
 		end
 		if RaidTotal > 15 and WebDKP_Options["AwardBossDKP25"] == 1 then GoFlag = 1 end 			-- Is the group 25 and is 25 enabled
