@@ -19,9 +19,23 @@ function WebDKP_BossAward_PerformAward(arg1,arg2,arg7)
 local GoFlag = 0;
 RaidTotal = GetNumGroupMembers()
 
-if (arg2 =="UNIT_DIED" or arg2 =="Freya" or arg2=="Hodir" or arg2=="Thorim" or arg2=="Mimiron" or arg2=="Brann Bronzebeard" or arg2 =="Highlord Tirion Fordring" or arg2 == "King Varian Wrynn" or arg2=="Garrosh Hellscream" or arg2=="Muradin Bronzebeard" or arg2=="High Overlord Saurfang" or arg2=="Valithria Dreamwalker" or arg2=="Lord Magmathar" or arg2=="Lord Victor Nefarius" or arg2=="Cho'gall" or arg2=="Al'Akir" or arg2=="Elementium Monstrosity" or arg2=="Omnotron" or arg2=="Nefarian" or arg2=="Shannox" or arg2=="Lord Rhyolith" or arg2=="Baleroc" or arg2=="Alysrazor" or arg2=="Ragnaros" or args2=="Kalecgos" or args2=="Alexstrasza" or args2=="Nozdormu" or args2=="Ysera") then
+if (arg2 =="UNIT_DIED" or arg2 =="Freya" or arg2=="Hodir" or arg2=="Thorim" or arg2=="Mimiron" or arg2=="Brann Bronzebeard" or arg2 =="Highlord Tirion Fordring" or arg2 == "King Varian Wrynn" or arg2=="Garrosh Hellscream" or arg2=="Muradin Bronzebeard" or arg2=="High Overlord Saurfang" or arg2=="Valithria Dreamwalker" or arg2=="Lord Magmathar" or arg2=="Lord Victor Nefarius" or arg2=="Cho'gall" or arg2=="Al'Akir" or arg2=="Elementium Monstrosity" or arg2=="Omnotron" or arg2=="Nefarian" or arg2=="Shannox" or arg2=="Lord Rhyolith" or arg2=="Baleroc" or arg2=="Alysrazor" or arg2=="Ragnaros" or arg2=="Kalecgos" or arg2=="Alexstrasza" or arg2=="Nozdormu" or arg2=="Ysera") then
 if( WebDKP_Options["AwardBossDKP"] == 1) then
 ZoneName = GetRealZoneText();
+
+-- First check the boss kill list
+if (arg2 =="UNIT_DIED") then
+	local bossKilled = WebDKP_BossKillList[arg7];
+	if	(bossKilled~=nil) then
+		WebDKP_AwardDKP(bossKilled)
+		return;
+	end	
+end
+
+-- Then check the council list
+
+
+-- check yell list
 
 	----------------------------------------------------------------
 
@@ -240,6 +254,27 @@ end
 end
 
 
+function WebDKP_AwardDKP(BossName)
+	if RaidTotal > 15 and WebDKP_Options["AwardBossDKP25"] == 1 then GoFlag = 1 end 			-- Is the group 25 and is 25 enabled
+	if RaidTotal < 11 and WebDKP_Options["AwardBossDKP10"] == 1 and RaidTotal > 5 then GoFlag = 1 end	-- Is the group 10 and is 10 enabled
+
+	if GoFlag == 1 then
+
+		PlaySound("QUESTCOMPLETED");
+
+		WebDKP_UpdatePlayersInGroup();
+		local dkp = WebDKP_GeneralOptions_FrameBossDKP:GetText();
+		if(dkp == nil or dkp == "") then
+				dkp = 0;
+		end
+		dkp = tonumber(dkp);
+		
+		WebDKP_AddDKP(dkp, "Auto Award Boss Kill: "..BossName, "false" , WebDKP_PlayersInGroup);
+		WebDKP_AnnounceBossAward(dkp); 
+		WebDKP_Refresh()
+
+	end
+end
 
 -- ================================
 -- Toggles displaying the timed award panel
@@ -449,3 +484,75 @@ function WebDKP_TimedAward_PerformAward()
 	WebDKP_Refresh()
 	
 end
+
+-- Boss Kill list 
+WebDKP_BossKillList = {
+	["Magmaw"]="Magmaw",
+	["Argaloth"] = "Argaloth",
+	["Al'Akira"] = "Al'Akira",
+	["Cho'gall"] = "Cho'gall",
+	["Chimaeron"] = "Chimaeron",
+	["Sinestra"] = "Sinestra",
+	["Emalon the Storm Watcher"] = "Emalon the Storm Watcher", 
+	["Maloriak"] = "Maloriak",
+	["Halfus Wyrmbreaker"] = "Halfus Wyrmbreaker",
+	["Atramedes"] = "Atramedes",
+	["Archavon the Stone Watcher"] = "Archavon the Stone Watcher",
+	["Koralon the Flame Watcher"] = "Koralon the Flame Watcher",
+	["Onyxia"] = "Onyxia",
+	["Anub'Rekhan"] = "Anub'Rekhan",
+	["Grand Widow Faerlina"] = "Grand Widow Faerlina",
+	["Maexxna"] = "Maexxna",
+	["Icehowl"] = "Icehowl",
+	["Lord Jaraxxus"] = "Lord Jaraxxus",
+	["Instructor Razuvious"] = "Instructor Razuvious",
+	["Gothik the Harvester"] = "Gothik the Harvester",
+	["Four Horsemen"] = "Four Horsemen",
+	["Patchwerk"] = "Patchwerk",
+	["Grobbulus"] = "Grobbulus",
+	["Gluth"] = "Gluth",
+	["Thaddius"] = "Thaddius",
+	["Noth the Plaguebringer"] = "Noth the Plaguebringer",
+	["Heigan the Unclean"] = "Heigan the Unclean",
+	["Loatheb"] = "Loatheb",
+	["Sapphiron"] = "Sapphiron",
+	["Kel'Thuzad"] = "Kel'Thuzad",
+	["Flame Leviathan"] = "Flame Leviathan",
+	["Ignis the Furnace Master"] = "Ignis the Furnace Master",
+	["Razorscale"] = "Razorscale",
+	["XT-002 Deconstructor"] = "XT-002 Deconstructor",
+	["Kologarn"] = "Kologarn",
+	["Iron Council"] = "Iron Council",
+	["Auriaya"] = "Auriaya",
+	["Mimiron"] = "Mimiron",
+	["Freya"] = "Freya",
+	["Thorim"] = "Thorim",
+	["Hodir"] = "Hodir",
+	["General Vezax"] = "General Vezax",
+	["Sartharion"] = "Sartharion",
+	["Yogg-Saron"] = "Yogg-Saron",
+	["Malygos"] = "Malygos",
+	["Anub'arak"] = "Anub'arak",
+	["Fjola Lightbane"] = "Fjola Lightbane",
+	["Lord Marrowgar"] = "Lord Marrowgar",
+	["Lady Deathwhisper"] = "Lady Deathwhisper",
+	["Deathbringer Saurfang"] = "Deathbringer Saurfang",
+	["Festergut"] = "Festergut",
+	["Rotface"] = "Rotface",
+	["Professor Putricide"] = "Professor Putricide",
+	["Blood-Queen Lana'thel"] = "Blood-Queen Lana'thel",
+	["Sindragosa"] = "Sindragosa",
+	["Valiona"] = "Valiona",
+	["Alysrazor"] = "Alysrazor",
+	["Ragnaros"] = "Ragnaros",
+	["Beth'tilac"] = "Beth'tilac",
+	["Majordomo Staghelm"] = "Majordomo Staghelm",
+	["The Lich King"] = "The Lich King",
+	["Morchok"] = "Morchok",
+	["Warlord Zon'ozz"] = "Warlord Zon'ozz",
+	["Yor'sahj the Unsleeping"] = "Yor'sahj the Unsleeping",
+	["Hagara the Stormbinder"] = "Hagara the Stormbinder",
+	["Ultraxion"] = "Ultraxion",
+	["Deathwing"] = "Spine of Deathwing",
+	["Warmaster Blackhorn"] = "Warmaster Blackhorn"
+};
