@@ -23,13 +23,20 @@ if (arg2 =="UNIT_DIED" or arg2 =="Freya" or arg2=="Hodir" or arg2=="Thorim" or a
 if( WebDKP_Options["AwardBossDKP"] == 1) then
 ZoneName = GetRealZoneText();
 
+--if(arg2 ~="UNIT_DIED") then
+--local name = UnitName("player");
+--local toSay = ("NPC " .. arg2);
+--SendChatMessage(toSay, "WHISPER", "Common", name);
+--toSay = ("Message " .. arg7);
+--SendChatMessage(toSay, "WHISPER", "Common", name);
+--end
 	----------------------------------------------------------------
 
 	---------------------------------------------------------------
 	-- Added by Zevious to detect Naxxramas Four Horsemen Kill
 	-- 5/26/09
 	---------------------------------------------------------------
-	if (arg7 == "Than Kor�Thazz" and _G["KorFlag"] == 1) then 
+	if (arg7 == "Than Kor'Thazz" and _G["KorFlag"] == 1) then 
 		_G["RivendareFlag"] = 0;
 		_G["LadyFlag"] = 0;
 		_G["SirFlag"] = 0;
