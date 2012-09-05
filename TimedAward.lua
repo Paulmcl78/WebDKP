@@ -23,7 +23,7 @@ if (arg2 =="UNIT_DIED" or arg2 =="Freya" or arg2=="Hodir" or arg2=="Thorim" or a
 if( WebDKP_Options["AwardBossDKP"] == 1) then
 ZoneName = GetRealZoneText();
 
---test
+--test2
 	----------------------------------------------------------------
 
 	---------------------------------------------------------------
