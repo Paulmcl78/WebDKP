@@ -19,7 +19,7 @@ function WebDKP_BossAward_PerformAward(arg1,arg2,arg7)
 local GoFlag = 0;
 RaidTotal = GetNumGroupMembers()
 
-if (arg2 =="UNIT_DIED" or arg2 =="Freya" or arg2=="Hodir" or arg2=="Thorim" or arg2=="Mimiron" or arg2=="Brann Bronzebeard" or arg2 =="Highlord Tirion Fordring" or arg2 == "King Varian Wrynn" or arg2=="Garrosh Hellscream" or arg2=="Muradin Bronzebeard" or arg2=="High Overlord Saurfang" or arg2=="Valithria Dreamwalker" or arg2=="Lord Magmathar" or arg2=="Lord Victor Nefarius" or arg2=="Cho'gall" or arg2=="Al'Akir" or arg2=="Elementium Monstrosity" or arg2=="Omnotron" or arg2=="Nefarian" or arg2=="Shannox" or arg2=="Lord Rhyolith" or arg2=="Baleroc" or arg2=="Alysrazor" or arg2=="Ragnaros" or args2=="Kalecgos" or args2=="Alexstrasza" or args2=="Nozdormu" or args2=="Ysera") then
+if (arg2 =="UNIT_DIED" or arg2 =="Freya" or arg2=="Hodir" or arg2=="Thorim" or arg2=="Mimiron" or arg2=="Brann Bronzebeard" or arg2 =="Highlord Tirion Fordring" or arg2 == "King Varian Wrynn" or arg2=="Garrosh Hellscream" or arg2=="Muradin Bronzebeard" or arg2=="High Overlord Saurfang" or arg2=="Valithria Dreamwalker" or arg2=="Lord Magmathar" or arg2=="Lord Victor Nefarius" or arg2=="Cho'gall" or arg2=="Al'Akir" or arg2=="Elementium Monstrosity" or arg2=="Omnotron" or arg2=="Nefarian" or arg2=="Shannox" or arg2=="Lord Rhyolith" or arg2=="Baleroc" or arg2=="Alysrazor" or arg2=="Ragnaros" or arg2=="Kalecgos" or arg2=="Alexstrasza" or arg2=="Nozdormu" or arg2=="Ysera") then
 if( WebDKP_Options["AwardBossDKP"] == 1) then
 ZoneName = GetRealZoneText();
 
