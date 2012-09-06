@@ -1,4 +1,4 @@
-------------------------------------------------------------------------
+﻿------------------------------------------------------------------------
 -- TimedAward	
 ------------------------------------------------------------------------
 -- Contains methods related to timed awards and the timed awards gui frame. 
@@ -42,10 +42,10 @@ function WebDKP_BossAward_PerformAward(arg1,arg2,arg7)
 
 	-- check yell list
 		local yellKill = WebDKP_BossYellList[arg2]
-		if (yellKill~=nil)
+		if (yellKill~=nil) then
 			local YellBossKilled = yellKill[1];
-			for k,v in pairs(yellKill[2]}
-				if (string.find(arg1,v)~=nil then
+			for k,v in pairs(yellKill[2]) do
+				 if (string.find(arg1,v)~=nil) then
 					WebDKP_AwardDKP(YellBossKilled);
 					return;
 				end
