@@ -18,7 +18,7 @@
 function WebDKP_BossAward_PerformAward(arg1,arg2,arg7) 
 
 	if( WebDKP_Options["AwardBossDKP"] == 1) then
-	ZoneName = GetRealZoneText();
+		ZoneName = GetRealZoneText();
 
 		if ZoneName == "Blackwing Descent" and arg7 == "Onyxia" then
 			return;
@@ -80,7 +80,7 @@ function WebDKP_AwardDKP(BossName)
 		dkp = tonumber(dkp);
 		
 		WebDKP_AddDKP(dkp, "Auto Award Boss Kill: "..BossName, "false" , WebDKP_PlayersInGroup);
-		WebDKP_AnnounceBossAward(dkp); 
+		WebDKP_AnnounceBossAward(dkp,BossName); 
 		WebDKP_Refresh()
 
 	end

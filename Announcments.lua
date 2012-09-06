@@ -28,7 +28,7 @@ WebDKP_BidEndSilent = 			"WebDKP: Bidding has ended for $item";
 WebDKP_RollEnd =			"WebDKP: Rolling has ended for $item. $name was the high roller with a $roll";
 
 WebDKP_TimedAward =			"WebDKP: $minutes Minute Timed Award of $dkp dkp Given";
-WebDKP_BossAwardNum =			"WebDKP: Great Job! A Boss Award of $dkp Has Been Given";
+WebDKP_BossAwardNum =			"WebDKP: Great Job! A Boss Award of $dkp Has Been Given for $boss";
 
 -- ================================
 -- Returns the location where notifications should be sent to. 
@@ -308,13 +308,15 @@ end
 -- ================================
 -- Announces that an automatted boss award has just been given
 -- Dkp = How much dkp was just given
+-- Boss = The boss/fight the DKP was awarded for
 -- Added by Zevious(Bronzebeard)
 -- ================================
-function WebDKP_AnnounceBossAward(dkp)
+function WebDKP_AnnounceBossAward(dkp,boss)
 if WebDKP_Options["Announcements"] == 0 then
 
 	local tellLocation = WebDKP_GetTellLocation();
 	local toSay =	string.gsub(WebDKP_BossAwardNum, "$dkp", dkp);
+	toSay =	string.gsub(toSay, "$boss", boss);
 	WebDKP_SendAnnouncement(toSay,tellLocation);
 
 end
