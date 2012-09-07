@@ -1281,9 +1281,36 @@
               </OnClick>
             </Scripts>
           </CheckButton>
-          <CheckButton name="$parentClassRogue" inherits="OptionsCheckButtonTemplate" checked="true">
+		  <CheckButton name="$parentClassMonk" inherits="OptionsCheckButtonTemplate" checked="true">
             <Anchors>
               <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentClassMage">
+                <Offset>
+                  <AbsDimension x="0" y="5" />
+                </Offset>
+              </Anchor>
+            </Anchors>
+            <Layers>
+              <Layer level="OVERLAY">
+                <FontString inherits="GameFontNormal" text="Monk">
+                  <Anchors>
+                    <Anchor point="LEFT">
+                      <Offset>
+                        <AbsDimension x="35" y="0"/>
+                      </Offset>
+                    </Anchor>
+                  </Anchors>
+                </FontString>
+              </Layer>
+            </Layers>
+            <Scripts>
+              <OnClick>
+                WebDKP_ToggleFilter("Monk");
+              </OnClick>
+            </Scripts>
+          </CheckButton>
+		  <CheckButton name="$parentClassRogue" inherits="OptionsCheckButtonTemplate" checked="true">
+            <Anchors>
+              <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentClassMonk">
                 <Offset>
                   <AbsDimension x="0" y="5" />
                 </Offset>
