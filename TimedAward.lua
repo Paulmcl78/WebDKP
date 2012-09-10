@@ -473,7 +473,7 @@ WebDKP_BossYellList ={
 ["Alysrazor"] = {"Alysrazor",{"The light..."}},
 ["Ragnaros"] = {"Ragnaros",{"Too soon!"}},
 ["Kalecgos"] ={"Madness of Deathwing",{"I will realign the flow of mana and fill the Dragon Soul with all my arcane might"}},
-["Alexstrasza"] = {"Madness of Deathwing",{"Excellent work. The fire of my heart glows with a brilliant purity unmatched. Every spark of it I will channel into the Dragon Soul"}},
+["Alexstrasza"] = {"Madness of Deathwing",{"Excellent work. The fire of my heart glows with a brilliant purity unmatched"}},
 ["Nozdormu"] = {"Madness of Deathwing",{"I will expend EVERYTHING to bind every thread here, now, around the Dragon Soul. What comes to pass will never be undone"}},
 ["Ysera"] = {"Madness of Deathwing",{"We are one step closer. The unknowable, transcendent power of the Emerald Dream, I now give unto the Dragon Soul"}},
 
