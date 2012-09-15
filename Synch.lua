@@ -38,30 +38,40 @@ function WebDKP_Synch_Processing(arg1,arg2)
 	local masterorbackup = WebDKP_Options["MasterOrBackup"];
 	local synch_master = WebDKP_Options["SynchFrom"];
 	local tableid = WebDKP_GetTableid();
-	if ((string.find(cmd,"!Synch")==1) and (string.find(cmd,synch_pass)==8)) then
-		WebDKP_Synch_Send(name);								-- Calls the Send Synch Function to send the DKP Table							
+	if (string.find(cmd,"!Synch")==1) then
+		if (synch_pass == "" or (string.find(cmd,synch_pass)==8) ) then
+				WebDKP_Synch_Send(name);					-- Calls the Send Synch Function to send the DKP Table
+		end
+													
 	end
 	if ((string.find(cmd,"!WDKP_Synch_All")==1) ) then
-		WebDKP_Synch_SendAll(name);								-- Calls the Send Synch Function to send the DKP Table							
+		WebDKP_Synch_SendAll(name);							-- Calls the Send Synch Function to send the DKP Table & Log						
 	end
 		
 	
 	-- This will process the DKP Table
-	if (string.find(cmd,"!Sending")==1) and (string.find(cmd,synch_pass)==10) and enabled == 1 then
-		local pattern = "!Sending (.+) (.+),(.+),(.+)";
-		_, _,test, nameofchar, class, dkp = string.find(cmd, pattern);
-		dkp = tonumber(dkp);
-		if nameofchar ~= nil then
-			if WebDKP_DkpTable[nameofchar] ~= nil then
-				WebDKP_DkpTable[nameofchar]["dkp_"..tableid] = dkp;
-			else -- Add to table
-				-- new person, they need to be added
-				local playerTier = 0;
-				WebDKP_DkpTable[nameofchar] = {
-					["dkp_"..tableid] = dkp,
-					["class"] = class,
+	if (string.find(cmd,"!Sending")==1) then
+		if (synch_pass == "" or (string.find(cmd,synch_pass)==10) ) then
+			if synch_pass == "" then
+				local pattern = "!Sending  (.+),(.+),(.+)";
+				_,test,nameofchar, class, dkp = string.find(cmd, pattern);
+			else
+				local pattern = "!Sending (.+) (.+),(.+),(.+)";
+				_, _,test, nameofchar, class, dkp = string.find(cmd, pattern);
+			end
+			dkp = tonumber(dkp);
+			if nameofchar ~= nil then
+				if WebDKP_DkpTable[nameofchar] ~= nil then
+					WebDKP_DkpTable[nameofchar]["dkp_"..tableid] = dkp;
+				else -- Add to table
+					-- new person, they need to be added
+					local playerTier = 0;
+					WebDKP_DkpTable[nameofchar] = {
+						["dkp_"..tableid] = dkp,
+						["class"] = class,
 						
-					}
+						}
+				end
 			end
 		end
 	end	
@@ -458,7 +468,6 @@ end
 -- This function sends the DKP Table.
 -- ===========================================================================================
 function WebDKP_Synch_Send(name)
-	
 	local synch_pass = WebDKP_Options["SynchPassword"];
 	local synch_master = WebDKP_Options["SynchFrom"];
 	for k, v in pairs(WebDKP_DkpTable) do

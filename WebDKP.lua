@@ -1735,7 +1735,12 @@ function WebDKP_Start_Synch()
 	local synch_master = WebDKP_Options["SynchFrom"];
 	local synch_pass = WebDKP_Options["SynchPassword"];
 	-- Add a confirmation box Are you sure you want to synch with ""
-	SendChatMessage("!Synch "..synch_pass, "WHISPER", nil, synch_master)		-- Whisper the person with the Master table and tell them to synch.
+	if (synch_master ~= nil and synch_master ~= "") then
+		SendChatMessage("!Synch "..synch_pass, "WHISPER", nil, synch_master)		-- Whisper the person with the Master table and tell them to synch.
+	else
+	-- Lets the user know that they need to fill in a name first.
+		SendChatMessage("WebDKP: Invalid user to Synchronize from", "WHISPER", nil, UnitName("player"))
+	end
 
 end
 
