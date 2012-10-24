@@ -432,7 +432,7 @@ WebDKP_BossKillList = {
     -- Mogu'shan Vaults
     --["Stone Guard"] = "The Stone Guard",                    		-- Council type - possible boss yell added below
     ["Feng the Accursed"] = "Feng the Accursed",
-    ["Gara'jal the Spriritbinder"] = "Gara'jal the Spriritbinder",
+    ["Gara'jal the Spiritbinder"] = "Gara'jal the Spiritbinder",
     ["The Spirit Kings"] = "The Spirit Kings",               		-- Council type - need to get boss yell
     ["Elegon"] = "Elegon",
     ["Will of the Emperor"] = "Will of the Emperor",            	-- Council type -  need to get boss yell
@@ -482,5 +482,6 @@ WebDKP_BossYellList ={
     -------------------------
 	
 	  -- Mogu'shan Vaults
-["Lorewalker Cho"] = {"The Stone Guard",{"That was close"}}
+["Lorewalker Cho"] = {"The Stone Guard",{"That was close"}},
+["Meng the Demented"] = {"The Spirit Kings",{"I... I don't want to die"}}
 }
