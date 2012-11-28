@@ -56,6 +56,7 @@ WebDKP_Filters = {
 	["Druid"] = 1,
 	["Hunter"] = 1,
 	["Mage"] = 1,
+	["Monk"] = 1,
 	["Rogue"] = 1,
 	["Shaman"] = 1,
 	["Paladin"] = 1,
@@ -74,11 +75,11 @@ WebDKP_Filters = {
 -- Specifies what classes compose different filter groups
 WebDKP_FilterGroups = {
 	["Casters"] = "Paladin Shaman Mage Warlock Priest Druid",
-	["Melee"] = "Paladin Shaman Warrior Rogue Druid Hunter Death Knight",
-	["Healer"] = "Shaman Paladin Priest Druid",
+	["Melee"] = "Paladin Shaman Warrior Rogue Druid Hunter Death Knight Monk",
+	["Healer"] = "Shaman Paladin Priest Druid Monk",
 	["Chain"] = "Shaman Hunter",
 	["Cloth"] = "Warlock Mage Priest",
-	["Leather"] = "Rogue Druid",
+	["Leather"] = "Rogue Druid Monk",
 	["Plate"] = "Warrior Paladin Death Knight"
 }
 
@@ -1023,6 +1024,7 @@ function WebDKP_CheckAllFilters()
 	WebDKP_SetFilterState("Druid",1);
 	WebDKP_SetFilterState("Hunter",1);
 	WebDKP_SetFilterState("Mage",1);
+	WebDKP_SetFilterState("Monk",1);
 	WebDKP_SetFilterState("Rogue",1);
 	WebDKP_SetFilterState("Shaman",1);
 	WebDKP_SetFilterState("Paladin",1);
@@ -1047,6 +1049,7 @@ function WebDKP_UncheckAllFilters()
 	WebDKP_SetFilterState("Druid",0);
 	WebDKP_SetFilterState("Hunter",0);
 	WebDKP_SetFilterState("Mage",0);
+	WebDKP_SetFilterState("Monk",0);
 	WebDKP_SetFilterState("Rogue",0);
 	WebDKP_SetFilterState("Shaman",0);
 	WebDKP_SetFilterState("Paladin",0);
@@ -1103,6 +1106,7 @@ function WebDKP_AllFiltersOn(filters)
 	filter["Druid"] = string.find(string.lower(filters), "druid");
 	filter["Hunter"] = string.find(string.lower(filters), "hunter");
 	filter["Mage"]= string.find(string.lower(filters), "mage");
+	filter["Monk"]= string.find(string.lower(filters), "monk");
 	filter["Rogue"] = string.find(string.lower(filters), "rogue");
 	filter["Shaman"] = string.find(string.lower(filters), "shaman");
 	filter["Paladin"] = string.find(string.lower(filters), "paladin");
@@ -1134,6 +1138,7 @@ function WebDKP_SetFilterGroupState(filters,newState)
 	filter["Druid"] = string.find(string.lower(filters), "druid");
 	filter["Hunter"] = string.find(string.lower(filters), "hunter");
 	filter["Mage"]= string.find(string.lower(filters), "mage");
+	filter["Monk"]= string.find(string.lower(filters), "monk");
 	filter["Rogue"] = string.find(string.lower(filters), "rogue");
 	filter["Shaman"] = string.find(string.lower(filters), "shaman");
 	filter["Paladin"] = string.find(string.lower(filters), "paladin");
@@ -1730,7 +1735,12 @@ function WebDKP_Start_Synch()
 	local synch_master = WebDKP_Options["SynchFrom"];
 	local synch_pass = WebDKP_Options["SynchPassword"];
 	-- Add a confirmation box Are you sure you want to synch with ""
-	SendChatMessage("!Synch "..synch_pass, "WHISPER", nil, synch_master)		-- Whisper the person with the Master table and tell them to synch.
+	if (synch_master ~= nil and synch_master ~= "") then
+		SendChatMessage("!Synch "..synch_pass, "WHISPER", nil, synch_master)		-- Whisper the person with the Master table and tell them to synch.
+	else
+	-- Lets the user know that they need to fill in a name first.
+		SendChatMessage("WebDKP: Invalid user to Synchronize from", "WHISPER", nil, UnitName("player"))
+	end
 
 end
 

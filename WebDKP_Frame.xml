@@ -330,7 +330,7 @@
             </Anchor>
           </Anchors>
         </Texture>
-        <FontString name="$parentTitle" inherits="GameFontNormal" text="WebDKP v3.8">
+        <FontString name="$parentTitle" inherits="GameFontNormal" text="WebDKP v3.9">
           <Anchors>
             <Anchor point="TOP" relativeTo="$parentHeaderTexture">
               <Offset>
@@ -1065,7 +1065,7 @@
         <Anchors>
           <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT">
             <Offset>
-              <AbsDimension x="460" y="80"/>
+              <AbsDimension x="460" y="70"/>
             </Offset>
           </Anchor>
         </Anchors>
@@ -1102,7 +1102,7 @@
         <Anchors>
           <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT">
             <Offset>
-              <AbsDimension x="460" y="50"/>
+              <AbsDimension x="460" y="45"/>
             </Offset>
           </Anchor>
         </Anchors>
@@ -1143,7 +1143,7 @@
           </Anchor>
           <Anchor point="BOTTOMRIGHT">
             <Offset>
-              <AbsDimension x="-20" y="110" />
+              <AbsDimension x="-20" y="100" />
             </Offset>
           </Anchor>
         </Anchors>
@@ -1281,9 +1281,36 @@
               </OnClick>
             </Scripts>
           </CheckButton>
-          <CheckButton name="$parentClassRogue" inherits="OptionsCheckButtonTemplate" checked="true">
+		  <CheckButton name="$parentClassMonk" inherits="OptionsCheckButtonTemplate" checked="true">
             <Anchors>
               <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentClassMage">
+                <Offset>
+                  <AbsDimension x="0" y="5" />
+                </Offset>
+              </Anchor>
+            </Anchors>
+            <Layers>
+              <Layer level="OVERLAY">
+                <FontString inherits="GameFontNormal" text="Monk">
+                  <Anchors>
+                    <Anchor point="LEFT">
+                      <Offset>
+                        <AbsDimension x="35" y="0"/>
+                      </Offset>
+                    </Anchor>
+                  </Anchors>
+                </FontString>
+              </Layer>
+            </Layers>
+            <Scripts>
+              <OnClick>
+                WebDKP_ToggleFilter("Monk");
+              </OnClick>
+            </Scripts>
+          </CheckButton>
+		  <CheckButton name="$parentClassRogue" inherits="OptionsCheckButtonTemplate" checked="true">
+            <Anchors>
+              <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" relativeTo="$parentClassMonk">
                 <Offset>
                   <AbsDimension x="0" y="5" />
                 </Offset>
@@ -1888,7 +1915,7 @@
           </Anchor>
           <Anchor point="BOTTOMRIGHT">
             <Offset>
-              <AbsDimension x="-20" y="110" />
+              <AbsDimension x="-20" y="100" />
             </Offset>
           </Anchor>
         </Anchors>
@@ -2102,7 +2129,7 @@
           </Anchor>
           <Anchor point="BOTTOMRIGHT">
             <Offset>
-              <AbsDimension x="-20" y="110" />
+              <AbsDimension x="-20" y="100" />
             </Offset>
           </Anchor>
         </Anchors>
@@ -2249,7 +2276,7 @@
           </Anchor>
           <Anchor point="BOTTOMRIGHT">
             <Offset>
-              <AbsDimension x="-20" y="110" />
+              <AbsDimension x="-20" y="100" />
             </Offset>
           </Anchor>
         </Anchors>

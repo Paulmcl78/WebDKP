@@ -1,4 +1,4 @@
-------------------------------------------------------------------------
+﻿------------------------------------------------------------------------
 -- TimedAward	
 ------------------------------------------------------------------------
 -- Contains methods related to timed awards and the timed awards gui frame. 
@@ -16,237 +16,75 @@
 -- Added by Zevious (Bronzebeard)
 -- =====================================================================
 function WebDKP_BossAward_PerformAward(arg1,arg2,arg7) 
-local GoFlag = 0;
-RaidTotal = GetNumGroupMembers()
 
-if (arg2 =="UNIT_DIED" or arg2 =="Freya" or arg2=="Hodir" or arg2=="Thorim" or arg2=="Mimiron" or arg2=="Brann Bronzebeard" or arg2 =="Highlord Tirion Fordring" or arg2 == "King Varian Wrynn" or arg2=="Garrosh Hellscream" or arg2=="Muradin Bronzebeard" or arg2=="High Overlord Saurfang" or arg2=="Valithria Dreamwalker" or arg2=="Lord Magmathar" or arg2=="Lord Victor Nefarius" or arg2=="Cho'gall" or arg2=="Al'Akir" or arg2=="Elementium Monstrosity" or arg2=="Omnotron" or arg2=="Nefarian" or arg2=="Shannox" or arg2=="Lord Rhyolith" or arg2=="Baleroc" or arg2=="Alysrazor" or arg2=="Ragnaros" or arg2=="Kalecgos" or arg2=="Alexstrasza" or arg2=="Nozdormu" or arg2=="Ysera") then
-if( WebDKP_Options["AwardBossDKP"] == 1) then
-ZoneName = GetRealZoneText();
+	if( WebDKP_Options["AwardBossDKP"] == 1) then
+		ZoneName = GetRealZoneText();
 
---if(arg2 ~="UNIT_DIED") then
---local name = UnitName("player");
---local toSay = ("NPC " .. arg2);
---SendChatMessage(toSay, "WHISPER", "Common", name);
---toSay = ("Message " .. arg7);
---SendChatMessage(toSay, "WHISPER", "Common", name);
---end
-	----------------------------------------------------------------
-
-	---------------------------------------------------------------
-	-- Added by Zevious to detect Naxxramas Four Horsemen Kill
-	-- 5/26/09
-	---------------------------------------------------------------
-	if (arg7 == "Than Kor'Thazz" and _G["KorFlag"] == 1) then 
-		_G["RivendareFlag"] = 0;
-		_G["LadyFlag"] = 0;
-		_G["SirFlag"] = 0;
-	end
-	if (arg7 == "Baron Rivendare" and _G["RivendareFlag"]) == 1 then 
-		_G["KorFlag"] = 0;
-		_G["LadyFlag"] = 0;
-		_G["SirFlag"] = 0;
-	end
-	if (arg7 == "Lady Blaumeux" and _G["LadyFlag"]) == 1 then 
-		_G["KorFlag"] = 0;
-		_G["RivendareFlag"] = 0;
-		_G["SirFlag"] = 0;
-	end
-	if (arg7 == "Sir Zeliek" and _G["SirFlag"]) == 1 then 
-		_G["KorFlag"] = 0;
-		_G["RivendareFlag"] = 0;
-		_G["LadyFlag"] = 0;
-	end
-	if (arg7 == "Than Kor'Thazz") then _G["KorFlag"] = 1 end
-	if (arg7 == "Baron Rivendare") then _G["RivendareFlag"] = 1 end
-	if (arg7 == "Lady Blaumeux") then _G["LadyFlag"] = 1 end
-	if (arg7 == "Sir Zeliek") then _G["SirFlag"] = 1 end
-	if (_G["KorFlag"] + _G["RivendareFlag"] + _G["LadyFlag"] +_G["SirFlag"]  == 3) then 
-		arg7 ="Four Horsemen" 
-		_G["KorFlag"] = 0;
-		_G["RivendareFlag"] = 0;
-		_G["LadyFlag"] = 0;
-		_G["SirFlag"] = 0;
-	end
-
-	-- This if statement checks for a boss dieing to determine if an auto award should be given.
-	-- =======================================================================================================================
-	if (arg7 =="Magmaw" or
-	arg7 == "Argaloth" or
-	arg7 == "Al'Akira" or
-	arg7 == "Cho'gall" or
-	arg7 == "Chimaeron" or
-	arg7 == "Sinestra" or
-	arg7 == "Emalon the Storm Watcher" or 
-	arg7 == "Maloriak" or
-	arg7 == "Halfus Wyrmbreaker" or
-	arg7 == "Atramedes" or
-	arg7 == "Archavon the Stone Watcher" or
-	arg7 == "Koralon the Flame Watcher" or
-	arg7 == "Onyxia" or
-	arg7 == "Anub'Rekhan" or
-	arg7 == "Grand Widow Faerlina" or
-	arg7 == "Maexxna" or
-	arg7 == "Icehowl" or
-	arg7 == "Lord Jaraxxus" or
-	arg7 == "Instructor Razuvious" or
-	arg7 == "Gothik the Harvester" or
-	arg7 == "Four Horsemen" or
-	arg7 == "Patchwerk" or
-	arg7 == "Grobbulus" or
-	arg7 == "Gluth" or
-	arg7 == "Thaddius" or
-	arg7 == "Noth the Plaguebringer" or
-	arg7 == "Heigan the Unclean" or
-	arg7 == "Loatheb" or
-	arg7 == "Sapphiron" or
-	arg7 == "Kel'Thuzad" or
-	arg7 == "Flame Leviathan" or
-	arg7 == "Ignis the Furnace Master" or
-	arg7 == "Razorscale" or
-	arg7 == "XT-002 Deconstructor" or
-	arg7 == "Kologarn" or
-	arg7 == "Iron Council" or
-	arg7 == "Auriaya" or
-	arg7 == "Mimiron" or
-	arg7 == "Freya" or
-	arg7 == "Thorim" or
-	arg7 == "Hodir" or
-	arg7 == "General Vezax" or
-	arg7 == "Sartharion" or
-	arg7 == "Yogg-Saron" or
-	arg7 == "Malygos") or
-	arg7 == "Anub'arak" or
-	arg7 == "Fjola Lightbane" or
-	arg7 == "Lord Marrowgar" or
-	arg7 == "Lady Deathwhisper" or
-	arg7 == "Deathbringer Saurfang" or
-	arg7 == "Festergut" or
-	arg7 == "Rotface" or
-	arg7 == "Professor Putricide" or
-	arg7 == "Blood-Queen Lana'thel" or
-	arg7 == "Sindragosa" or
-	arg7 == "Valiona" or
-	arg7 == "Alysrazor" or
-	arg7 == "Ragnaros" or
-	arg7 == "Beth'tilac" or
-	arg7 == "Majordomo Staghelm" or
-	arg7 == "The Lich King" or
-	arg7 == "Morchok" or
-	arg7 == "Warlord Zon'ozz" or
-	arg7 == "Yor'sahj the Unsleeping" or
-	arg7 == "Hagara the Stormbinder" or
-	arg7 == "Ultraxion" or
-	arg7 == "Deathwing" or
-	arg7 == "Warmaster Blackhorn" then
-		if arg7 == nil then
-			arg7 = arg2;
-		end
 		if ZoneName == "Blackwing Descent" and arg7 == "Onyxia" then
 			return;
 		end
-		if arg7 == "Deathwing" then
-			arg7 = "Spine of Deathwing";
+
+	-- First check the boss kill list
+		if (arg2 =="UNIT_DIED") then
+			local bossKilled = WebDKP_BossKillList[arg7];
+			if	(bossKilled~=nil) then
+				WebDKP_AwardDKP(bossKilled);
+				return;
+			end	
 		end
 
-		if RaidTotal > 15 and WebDKP_Options["AwardBossDKP25"] == 1 then GoFlag = 1 end 			-- Is the group 25 and is 25 enabled
-		if RaidTotal < 11 and WebDKP_Options["AwardBossDKP10"] == 1 and RaidTotal > 5 then GoFlag = 1 end	-- Is the group 10 and is 10 enabled
+	-- Then check the council list
+		local concilKill = WebDKP_Check_Council_Fights(arg7);
+		if (concilKill~=nil) then
+			WebDKP_AwardDKP(concilKill);
+			return;
+		end
 
-			if GoFlag == 1 then
-
-			PlaySound("QUESTCOMPLETED");
-
-			WebDKP_UpdatePlayersInGroup();
-			local dkp = WebDKP_GeneralOptions_FrameBossDKP:GetText();
-			if(dkp == nil or dkp == "") then
-					dkp = 0;
+	-- check yell list
+		local yellKill = WebDKP_BossYellList[arg2]
+		if (yellKill~=nil) then
+			local YellBossKilled = yellKill[1];
+			for k,v in pairs(yellKill[2]) do
+				 if (string.find(arg1,v)~=nil) then
+					WebDKP_AwardDKP(YellBossKilled);
+					return;
+				end
 			end
-			dkp = tonumber(dkp);
-			WebDKP_AddDKP(dkp, "Auto Award Boss Kill: "..arg7, "false" , WebDKP_PlayersInGroup);
-			WebDKP_AnnounceBossAward(dkp); 
-			WebDKP_Refresh()
-
 		end
- 	end
-	
-	-- This if statement checks "Yells" to determine if a boss encounter was won.
-	-- =======================================================================================================================
-	if (arg2 == "Valithria Dreamwalker" and (string.find(arg1, "I AM RENEWED! Ysera grant me the favor to lay these foul creatures to rest!")==1)) or
-	(arg2 == "Lord Victor Nefarius" and (string.find(arg1, "Hmm. A shame to lose that experiment...")==1)) or
-	(arg2 == "Lord Victor Nefarius" and (string.find(arg1, "Impressive! You managed to destroy one of my most horrific creations - a task I'd thought impossible until now.")==1)) or
-	(arg2 == "Lord Victor Nefarius" and (string.find(arg1, "I should've known better than to rely on something SO stupidly named... to entertain me for long.")==1)) or
-	(arg2 == "Muradin Bronzebeard" and (string.find(arg1, "Don't say I didn't warn ya, scoundrels! Onward, brothers and sisters!")==1)) or
-	(arg2 == "Muradin Bronzebeard" and (string.find(arg1, "That malfunctioning piece of junk was murder on the repair bills.")==1)) or
-	(arg2 == "High Overlord Saurfang" and (string.find(arg1, "The Alliance falter. Onward to the Lich King!")==1)) or
-	(arg2 == "Omnotron" and (string.find(arg1, "Defense systems obliterated. Powering down...")==1)) or
-	(arg2 == "Brann Bronzebeard" and (string.find(arg1, "You've defeated the Iron Council")==1)) or
-	(arg2 == "Thorim" and (string.find(arg1, "Stay your arms! I yield!" )== 1)) or
-	(arg2 == "Hodir" and (string.find(arg1, "I... I am released from his grasp... at last." )== 1)) or
-	(arg2 == "Freya" and (string.find(arg1, "His hold on me dissipates." )== 1)) or
-	(arg2 == "Mimiron" and (string.find(arg1, "It would appear that I've made a slight miscalculation.")== 1)) or
-	(arg2 == "Lord Jaraxxus" and (string.find(arg1, "Another will take my place. Your world is doomed.")== 1)) or
-	(arg2 == "King Varian Wrynn" and (string.find(arg1, "GLORY TO THE ALLIANCE!")== 1)) or
-	(arg2 == "Al'Akir" and (string.find(arg1, "GLORY TO THE ALLIANCE!")== 1)) or
-	(arg2 == "Cho'gall" and (string.find(arg1, "Foolish mortals-(Usurper's children!)")== 1)) or
-	(arg2 == "Al'Akir" and (string.find(arg1, "The Conclave of Wind has dissipated. Your honorable conduct and determination have earned you")== 1)) or
-	(arg2 == "Al'Akir" and (string.find(arg1, "After every storm... comes the calm...")== 1)) or
-	(arg2 == "Elementium Monstrosity" and (string.find(arg1, "Impossible...")== 1)) or
-	(arg2 == "Nefarian" and (string.find(arg1, "Defeat has never tasted so bitter...")== 1)) or
-	(arg2 == "Shannox" and (string.find(arg1, "Ohh... the pain")== 1)) or
-	(arg2 == "Lord Rhyolith" and (string.find(arg1, "Broken. Mnngghhh... broken...")== 1)) or
-	(arg2 == "Baleroc" and (string.find(arg1, "Mortal filth... the master's keep is forbidden....")== 1)) or
-	(arg2 == "Alysrazor" and (string.find(arg1, "The light...")== 1)) or
-	(arg2 == "Ragnaros" and (string.find(arg1, "Too soon!")== 1)) or
-	(arg2 == "Kalecgos" and (string.find(arg1, "I will realign the flow of mana and fill the Dragon Soul with all my arcane might")~=nil)) or
-	(arg2 == "Alexstrasza" and (string.find(arg1, "Excellent work. The fire of my heart glows with a brilliant purity unmatched. Every spark of it I will channel into the Dragon Soul")~=nil)) or
-	(arg2 == "Nozdormu" and (string.find(arg1, "I will expend EVERYTHING to bind every thread here, now, around the Dragon Soul. What comes to pass will never be undone")~=nil)) or
-	(arg2 == "Ysera" and (string.find(arg1, "We are one step closer. The unknowable, transcendent power of the Emerald Dream, I now give unto the Dragon Soul")~=nil)) or
-	(arg2 == "Garrosh Hellscream" and (string.find(arg1, "FOR THE HORDE!")== 1)) then
-		if arg2 == "Brann Bronzebeard" and (string.find(arg1, "You've defeated the Iron Council")==1) then
-			arg2 = "Iron Council";
-		elseif arg2 == "King Varian Wrynn" and (string.find(arg1, "GLORY TO THE ALLIANCE!")== 1) or
-				arg2 == "Garrosh Hellscream" and (string.find(arg1, "FOR THE HORDE!")== 1) then
-			arg2 = "The Champions - ToC";
-		elseif arg2 == "Garrosh Hellscream" and (string.find(arg1, "FOR THE HORDE!")== 1) then
-			arg2 = "The Champions - ToC";
-		elseif arg2 == "Muradin Bronzebeard" and (string.find(arg1, "Don't say I didn't warn ya, scoundrels! Onward, brothers and sisters!")==1) or 
-				arg2 == "High Overlord Saurfang" and (string.find(arg1, "The Alliance falter. Onward to the Lich King!")==1) then
-			arg2 = "Gunship Battle - ICC";
-		elseif arg2 == "Kalecgos" and (string.find(arg1, "I will realign the flow of mana and fill the Dragon Soul with all my arcane might")~=nil) or
-				arg2 == "Alexstrasza" and (string.find(arg1, "Excellent work. The fire of my heart glows with a brilliant purity unmatched. Every spark of it I will channel into the Dragon Soul")~=nil) or
-				arg2 == "Nozdormu" and (string.find(arg1, "I will expend EVERYTHING to bind every thread here, now, around the Dragon Soul. What comes to pass will never be undone")~=nil) or
-				arg2 == "Ysera" and (string.find(arg1, "We are one step closer. The unknowable, transcendent power of the Emerald Dream, I now give unto the Dragon Soul")~=nil) then
-			arg2 = "Madness of Deathwing";
-		end
-		if RaidTotal > 15 and WebDKP_Options["AwardBossDKP25"] == 1 then GoFlag = 1 end 			-- Is the group 25 and is 25 enabled
-		if RaidTotal < 11 and WebDKP_Options["AwardBossDKP10"] == 1 and RaidTotal > 5 then GoFlag = 1 end	-- Is the group 10 and is 10 enabled
-
-		if GoFlag == 1 then
-
-			PlaySound("QUESTCOMPLETED");
-
-			WebDKP_UpdatePlayersInGroup();
-			local dkp = WebDKP_GeneralOptions_FrameBossDKP:GetText();
-			if(dkp == nil or dkp == "") then
-					dkp = 0;
-			end
-			dkp = tonumber(dkp);
-			if arg2 == "Valiona" then
-				arg2 = "BoT Twins";
-			end
-			WebDKP_AddDKP(dkp, "Auto Award Boss Kill: "..arg2, "false" , WebDKP_PlayersInGroup);
-			WebDKP_AnnounceBossAward(dkp); 
-			WebDKP_Refresh()
-
-		end
- 	end
-
-end
-end	
+	end
 
 -- End of the Boss Award Function
 end
 
+-- ================================
+-- Awards DKP 
+-- input - Boss/fight name to show on dkp 
+-- ================================
+function WebDKP_AwardDKP(BossName)
+	
+	local GoFlag = 0;
+	RaidTotal = GetNumGroupMembers()
 
+	if RaidTotal > 15 and WebDKP_Options["AwardBossDKP25"] == 1 then GoFlag = 1 end 			-- Is the group 25 and is 25 enabled
+	if RaidTotal < 11 and WebDKP_Options["AwardBossDKP10"] == 1 and RaidTotal > 5 then GoFlag = 1 end	-- Is the group 10 and is 10 enabled
+
+	if GoFlag == 1 then
+
+		PlaySound("QUESTCOMPLETED");
+
+		WebDKP_UpdatePlayersInGroup();
+		local dkp = WebDKP_GeneralOptions_FrameBossDKP:GetText();
+		if(dkp == nil or dkp == "") then
+				dkp = 0;
+		end
+		dkp = tonumber(dkp);
+		
+		WebDKP_AddDKP(dkp, "Auto Award Boss Kill: "..BossName, "false" , WebDKP_PlayersInGroup);
+		WebDKP_AnnounceBossAward(dkp,BossName); 
+		WebDKP_Refresh()
+
+	end
+end
 
 -- ================================
 -- Toggles displaying the timed award panel
@@ -456,3 +294,195 @@ function WebDKP_TimedAward_PerformAward()
 	WebDKP_Refresh()
 	
 end
+
+-- ================================
+-- This function is used to check council fight
+-- input - NPC/Boss name recieved from event
+-- output - Boss/event name to be used for awarding dkp 
+-- ================================
+function WebDKP_Check_Council_Fights(BossName)
+
+local BossKilled = nil;
+
+	---------------------------------------------------------------
+	-- Added by Zevious to detect Naxxramas Four Horsemen Kill
+	-- 5/26/09
+	---------------------------------------------------------------
+	if (BossName == "Than Kor'Thazz" and _G["KorFlag"] == 1) then 
+		_G["RivendareFlag"] = 0;
+		_G["LadyFlag"] = 0;
+		_G["SirFlag"] = 0;
+	end
+	if (BossName == "Baron Rivendare" and _G["RivendareFlag"]) == 1 then 
+		_G["KorFlag"] = 0;
+		_G["LadyFlag"] = 0;
+		_G["SirFlag"] = 0;
+	end
+	if (BossName == "Lady Blaumeux" and _G["LadyFlag"]) == 1 then 
+		_G["KorFlag"] = 0;
+		_G["RivendareFlag"] = 0;
+		_G["SirFlag"] = 0;
+	end
+	if (BossName == "Sir Zeliek" and _G["SirFlag"]) == 1 then 
+		_G["KorFlag"] = 0;
+		_G["RivendareFlag"] = 0;
+		_G["LadyFlag"] = 0;
+	end
+	if (BossName == "Than Kor'Thazz") then _G["KorFlag"] = 1 end
+	if (BossName == "Baron Rivendare") then _G["RivendareFlag"] = 1 end
+	if (BossName == "Lady Blaumeux") then _G["LadyFlag"] = 1 end
+	if (BossName == "Sir Zeliek") then _G["SirFlag"] = 1 end
+	if (_G["KorFlag"] + _G["RivendareFlag"] + _G["LadyFlag"] +_G["SirFlag"]  == 3) then 
+		BossKilled ="Four Horsemen" 
+		_G["KorFlag"] = 0;
+		_G["RivendareFlag"] = 0;
+		_G["LadyFlag"] = 0;
+		_G["SirFlag"] = 0;
+	end
+	
+	return BossKilled;
+end
+
+-- ================================
+-- Boss kill list used when UNIT_DIED is detected
+-- This is in the format of [Parameter recieved by wow] = name you would like to show on dkp
+-- e.g. on the spine of deathing fight, the paramter passed is "Deathwing" but the fight is actually spine of deathing
+-- ================================ 
+WebDKP_BossKillList = {
+	["Magmaw"]="Magmaw",
+	["Argaloth"] = "Argaloth",
+	["Al'Akira"] = "Al'Akira",
+	["Cho'gall"] = "Cho'gall",
+	["Chimaeron"] = "Chimaeron",
+	["Sinestra"] = "Sinestra",
+	["Emalon the Storm Watcher"] = "Emalon the Storm Watcher", 
+	["Maloriak"] = "Maloriak",
+	["Halfus Wyrmbreaker"] = "Halfus Wyrmbreaker",
+	["Atramedes"] = "Atramedes",
+	["Archavon the Stone Watcher"] = "Archavon the Stone Watcher",
+	["Koralon the Flame Watcher"] = "Koralon the Flame Watcher",
+	["Onyxia"] = "Onyxia",
+	["Anub'Rekhan"] = "Anub'Rekhan",
+	["Grand Widow Faerlina"] = "Grand Widow Faerlina",
+	["Maexxna"] = "Maexxna",
+	["Icehowl"] = "Icehowl",
+	["Lord Jaraxxus"] = "Lord Jaraxxus",
+	["Instructor Razuvious"] = "Instructor Razuvious",
+	["Gothik the Harvester"] = "Gothik the Harvester",
+	["Four Horsemen"] = "Four Horsemen",
+	["Patchwerk"] = "Patchwerk",
+	["Grobbulus"] = "Grobbulus",
+	["Gluth"] = "Gluth",
+	["Thaddius"] = "Thaddius",
+	["Noth the Plaguebringer"] = "Noth the Plaguebringer",
+	["Heigan the Unclean"] = "Heigan the Unclean",
+	["Loatheb"] = "Loatheb",
+	["Sapphiron"] = "Sapphiron",
+	["Kel'Thuzad"] = "Kel'Thuzad",
+	["Flame Leviathan"] = "Flame Leviathan",
+	["Ignis the Furnace Master"] = "Ignis the Furnace Master",
+	["Razorscale"] = "Razorscale",
+	["XT-002 Deconstructor"] = "XT-002 Deconstructor",
+	["Kologarn"] = "Kologarn",
+	["Iron Council"] = "Iron Council",
+	["Auriaya"] = "Auriaya",
+	["Mimiron"] = "Mimiron",
+	["Freya"] = "Freya",
+	["Thorim"] = "Thorim",
+	["Hodir"] = "Hodir",
+	["General Vezax"] = "General Vezax",
+	["Sartharion"] = "Sartharion",
+	["Yogg-Saron"] = "Yogg-Saron",
+	["Malygos"] = "Malygos",
+	["Anub'arak"] = "Anub'arak",
+	["Fjola Lightbane"] = "Fjola Lightbane",
+	["Lord Marrowgar"] = "Lord Marrowgar",
+	["Lady Deathwhisper"] = "Lady Deathwhisper",
+	["Deathbringer Saurfang"] = "Deathbringer Saurfang",
+	["Festergut"] = "Festergut",
+	["Rotface"] = "Rotface",
+	["Professor Putricide"] = "Professor Putricide",
+	["Blood-Queen Lana'thel"] = "Blood-Queen Lana'thel",
+	["Sindragosa"] = "Sindragosa",
+	["Valiona"] = "Valiona",
+	["Alysrazor"] = "Alysrazor",
+	["Ragnaros"] = "Ragnaros",
+	["Beth'tilac"] = "Beth'tilac",
+	["Majordomo Staghelm"] = "Majordomo Staghelm",
+	["The Lich King"] = "The Lich King",
+	["Morchok"] = "Morchok",
+	["Warlord Zon'ozz"] = "Warlord Zon'ozz",
+	["Yor'sahj the Unsleeping"] = "Yor'sahj the Unsleeping",
+	["Hagara the Stormbinder"] = "Hagara the Stormbinder",
+	["Ultraxion"] = "Ultraxion",
+	["Deathwing"] = "Spine of Deathwing",
+	["Warmaster Blackhorn"] = "Warmaster Blackhorn",
+	
+	 -------------------------
+    --  Mists of Pandaria  --
+    -------------------------
+	  -- Heart of Fear
+    ["Imperial Vizier Zor'lok"] = "Imperial Vizier Zor'lok",
+    ["Blade Lord Ta'yak"] = "Blade Lord Ta'yak",
+    ["Garalon"] = "Garalon",
+    ["Wind Lord Mel'jarak"] = "Wind Lord Mel'jarak",
+    ["Amber-Shaper Un'sok"] = "Amber-Shaper Un'sok",
+    ["Grand Empress Shek'zeer"] = "Grand Empress Shek'zeer",
+	
+    -- Mogu'shan Vaults
+    --["Stone Guard"] = "The Stone Guard",                    		-- Council type - possible boss yell added below
+    ["Feng the Accursed"] = "Feng the Accursed",
+    ["Gara'jal the Spiritbinder"] = "Gara'jal the Spiritbinder",
+    ["The Spirit Kings"] = "The Spirit Kings",               		-- Council type - need to get boss yell
+    ["Elegon"] = "Elegon",
+    ["Will of the Emperor"] = "Will of the Emperor",            	-- Council type -  need to get boss yell
+    
+    -- Terrace of the Endless Spring
+    ["Protectors of the Endless"] = "Protectors of the Endless",    -- Council type -  need to get boss yell
+    ["Tsulong"] = "Tsulong",
+    ["Lei Shi"] = "Lei Shi",
+    ["Sha of Fear"] = "Sha of Fear"
+  
+};
+
+-- ================================
+-- Boss Yell list used when an NPC yell is used to determine the fight
+-- This is in the format of [NPC who made the yell] = {name you would like to show on dkp, {Yell1,yell2,etc..}}
+-- ================================ 
+WebDKP_BossYellList ={
+["Valithria Dreamwalker"] = {"Valithria Dreamwalker",{"I AM RENEWED! Ysera grant me the favor to lay these foul creatures to rest!"}},
+["Lord Victor Nefarius"] = {"Lord Victor Nefarius",{"Hmm. A shame to lose that experiment...","Impressive! You managed to destroy one of my most horrific creations - a task I'd thought impossible until now.","I should've known better than to rely on something SO stupidly named... to entertain me for long.","I should've known better than to rely on something SO stupidly named... to entertain me for long."}},
+["Muradin Bronzebeard"] = {"Gunship Battle - ICC", {"Don't say I didn't warn ya, scoundrels! Onward, brothers and sisters!", "That malfunctioning piece of junk was murder on the repair bills."}},
+["High Overlord Saurfang"] = {"Gunship Battle - ICC",{"The Alliance falter. Onward to the Lich King!"}},
+["Omnotron"] = {"Omnotron Defense system",{"Defense systems obliterated. Powering down..."}},
+["Brann Bronzebeard"] = {"Iron Council",{"You've defeated the Iron Council"}},
+["Thorim"] =  {"Thorim",{"Stay your arms! I yield!"}},
+["Hodir"] = {"Hodir",{"I... I am released from his grasp... at last."}},
+["Freya"] = {"Freya",{"His hold on me dissipates."}},
+["Mimiron"] = {"Mimiron",{"It would appear that I've made a slight miscalculation."}},
+["Lord Jaraxxus"] = {"Lord Jaraxxus",{"Another will take my place. Your world is doomed."}},
+["King Varian Wrynn"] = {"The Champions - ToC",{"GLORY TO THE ALLIANCE!"}},
+["Garrosh Hellscream"] = {"The Champions - ToC",{"FOR THE HORDE!"}},
+["Al'Akir"] = {"Al'Akir" ,{"GLORY TO THE ALLIANCE!","The Conclave of Wind has dissipated. Your honorable conduct and determination have earned you","After every storm... comes the calm..."}},
+["Cho'gall"] = {"Cho'gall", {"Foolish mortals-(Usurper's children!)"}},
+["Elementium Monstrosity"] = {"Elementium Monstrosity",{"Impossible..."}},
+["Nefarian"] = {"Nefarian",{"Defeat has never tasted so bitter..."}},
+["Shannox"] = {"Shannox",{"Ohh... the pain"}},
+["Lord Rhyolith"] = {"Lord Rhyolith",{"Broken. Mnngghhh... broken..."}},
+["Baleroc"] = {"Baleroc",{"Mortal filth... the master's keep is forbidden...."}},
+["Alysrazor"] = {"Alysrazor",{"The light..."}},
+["Ragnaros"] = {"Ragnaros",{"Too soon!"}},
+["Kalecgos"] ={"Madness of Deathwing",{"I will realign the flow of mana and fill the Dragon Soul with all my arcane might"}},
+["Alexstrasza"] = {"Madness of Deathwing",{"Excellent work. The fire of my heart glows with a brilliant purity unmatched"}},
+["Nozdormu"] = {"Madness of Deathwing",{"I will expend EVERYTHING to bind every thread here, now, around the Dragon Soul. What comes to pass will never be undone"}},
+["Ysera"] = {"Madness of Deathwing",{"We are one step closer. The unknowable, transcendent power of the Emerald Dream, I now give unto the Dragon Soul"}},
+
+	-------------------------
+    --  Mists of Pandaria  --
+    -------------------------
+	
+	  -- Mogu'shan Vaults
+["Lorewalker Cho"] = {"The Stone Guard",{"That was close"}},
+["Meng the Demented"] = {"The Spirit Kings",{"I... I don't want to die"}},
+["Gara'jal the Spiritbinder"] = {"Gara'jal the Spiritbinder",{"Bested by de likes of you"}}
+}

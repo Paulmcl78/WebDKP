@@ -970,26 +970,26 @@ end
 -- ================================
 -- Auto Assign the Loot Item. 
 -- Auto Give the Item. 
--- Added by Zevious (Bronzebeard)
+-- Added by Zevious (Bronzebeard)#
+-- Updated for MOP..GetMasterLootCandidate now requires slotID (worgames)
 -- ================================
 function Auto_Assign_Item_Player(player)
 local _, item,link = WebDKP_GetItemInfo(WebDKP_bidItem);
 
- for ci = 1, GetNumGroupMembers() do
-	candidate = GetMasterLootCandidate(ci);
-					-- name, rank, subgroup, level, class, fileName, zone, online, isDead, role, isML = GetRaidRosterInfo(ci);
-     if (candidate == player ) then
-         for li = 1, GetNumLootItems() do
-             local lootIcon, lootName, lootQuantity, rarity, locked = GetLootSlotInfo(li);
-	
-            if(lootName == item) then
-		GiveMasterLoot(li, ci);
-		ci = GetNumGroupMembers()+1;
-             end
-         end
-      end
- end
-
+for li = 1, GetNumLootItems() do
+ local lootIcon, lootName, lootQuantity, rarity, locked = GetLootSlotInfo(li);
+	if(lootName == item) then
+		for ci = 1, GetNumGroupMembers() do
+			candidate = GetMasterLootCandidate(li,ci);
+						-- name, rank, subgroup, level, class, fileName, zone, online, isDead, role, isML = GetRaidRosterInfo(ci);
+				if (candidate == player ) then
+					GiveMasterLoot(li, ci);
+					ci = GetNumGroupMembers()+1;
+					li = GetNumLootItems()+1
+				 end
+			 end
+		  end
+	 end
 end
 
 

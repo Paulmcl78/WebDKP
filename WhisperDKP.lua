@@ -234,6 +234,7 @@ function WebDKP_GetWhisperFiltersFromMessage(message)
 	filter["druid"] = string.find(string.lower(message), "druid");
 	filter["hunter"] = string.find(string.lower(message), "hunter");
 	filter["mage"]= string.find(string.lower(message), "mage");
+	filter["monk"]= string.find(string.lower(message), "monk");
 	filter["rogue"] = string.find(string.lower(message), "rogue");
 	filter["shaman"] = string.find(string.lower(message), "shaman");
 	filter["paladin"] = string.find(string.lower(message), "paladin");
@@ -244,7 +245,7 @@ function WebDKP_GetWhisperFiltersFromMessage(message)
 	
 	-- If no filters were passed, everything should be nill. In that case
 	-- just display everyone
-	if( filter["druid"] == nil and filter["hunter"] == nil and filter["mage"] == nil and
+	if( filter["druid"] == nil and filter["hunter"] == nil and filter["mage"] == nil and filter["monk"] == nil and
 		filter["rogue"] == nil and filter["shaman"] == nil and filter["paladin"] == nil  and
 		filter["priest"] == nil and filter["warrior"] == nil  and filter["warlock"] == nil and filter["death knight"] == nil ) then
 		filter["showall"] = true;
