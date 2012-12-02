@@ -1,7 +1,7 @@
-## Interface: 50001
+## Interface: 50100
 ## Title: WebDKP
-## Author: Zedd, Quartal, Xenosian, Agard, Zevious
-## Version: 3.6
+## Author: Zedd, Quartal, Xenosian, Agard, Zevious, Worgames
+## Version: 3.10
 ## Notes: An addon that allows you to easily record DKP and Attendance for guilds in game.
 ## URL: http://www.webDKP.com, http://www.dkptracker.com
 ## X-Category: Guild Raid
