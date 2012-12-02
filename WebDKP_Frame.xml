@@ -330,7 +330,7 @@
             </Anchor>
           </Anchors>
         </Texture>
-        <FontString name="$parentTitle" inherits="GameFontNormal" text="WebDKP v3.9">
+        <FontString name="$parentTitle" inherits="GameFontNormal" text="WebDKP v3.10">
           <Anchors>
             <Anchor point="TOP" relativeTo="$parentHeaderTexture">
               <Offset>
