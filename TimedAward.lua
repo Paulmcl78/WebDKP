@@ -441,7 +441,22 @@ WebDKP_BossKillList = {
     ["Protectors of the Endless"] = "Protectors of the Endless",    -- Council type -  need to get boss yell
     ["Tsulong"] = "Tsulong",
     ["Lei Shi"] = "Lei Shi",
-    ["Sha of Fear"] = "Sha of Fear"
+    ["Sha of Fear"] = "Sha of Fear",
+    
+    -- Throne of Thunder 
+    ["Jin'rokh the Breaker"]= "Jin'rokh the Breaker",
+    ["Horridon"] = "Horridon",
+    ["Council of Elders"] = "Council of Elders",   -- Council type - might need boss yell
+    ["Tortos"] = "Tortos",
+    ["Megaera"] = "Megaera",
+    ["Ji-Kun"] = "Ji-Kun",
+    ["Durumu the Forgotten"] = "Durumu the Forgotten",
+    ["Primordius"] = "Primordius",
+    ["Dark Animus"] = "Dark Animus",
+    ["Iron Qon"] = "Iron Qon",
+    ["Twin Consorts"] = "Twin Consorts",
+    ["Lei Shen"] = "Lei Shen",
+    ["Ra-den"] = "Ra-den"
   
 };
 
