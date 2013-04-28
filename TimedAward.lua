@@ -499,5 +499,4 @@ WebDKP_BossYellList ={
 	  -- Mogu'shan Vaults
 ["Lorewalker Cho"] = {"The Stone Guard",{"That was close"}},
 ["Meng the Demented"] = {"The Spirit Kings",{"I... I don't want to die"}}
---["Gara'jal the Spiritbinder"] = {"Gara'jal the Spiritbinder",{"Bested by de likes of you"}}
 }
